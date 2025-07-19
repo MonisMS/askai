@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { FaGithub, FaGoogle } from "react-icons/fa"
+import { FaGithub, FaGoogle } from "react-icons/fa";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Form,
@@ -34,7 +34,7 @@ const formSchema = z
   });
 
 export const SignUpView = () => {
-  const router = useRouter()
+  const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
@@ -56,13 +56,12 @@ export const SignUpView = () => {
         name: data.name,
         email: data.email,
         password: data.password,
-        callbackURL:"/"
+        callbackURL: "/",
       },
       {
         onSuccess: () => {
           setPending(false);
-          router.push("/")
-          
+          router.push("/");
         },
         onError: ({ error }) => {
           setError(error.message);
@@ -71,20 +70,18 @@ export const SignUpView = () => {
     );
   };
 
-
   const onSocial = (provider: "github" | "google") => {
     setError(null);
     setPending(true);
 
     authClient.signIn.social(
       {
-       provider:provider,
-       callbackURL:"/"
+        provider: provider,
+        callbackURL: "/",
       },
       {
         onSuccess: () => {
           setPending(false);
-          
         },
         onError: ({ error }) => {
           setError(error.message);
@@ -193,7 +190,7 @@ export const SignUpView = () => {
                   </Alert>
                 )}
                 <Button disabled={pending} type="submit" className="w-full">
-                  Sign In
+                  Sign Up
                 </Button>
                 <div
                   className="after:border-border relative text-center text-sm after:absolute
@@ -206,22 +203,22 @@ export const SignUpView = () => {
                 <div className="grid grid-cols-2 gap-4">
                   <Button
                     disabled={pending}
-                    onClick={() => onSocial("google")} 
+                    onClick={() => onSocial("google")}
                     variant="outline"
                     type="button"
                     className="w-full"
                   >
-                    <FaGoogle/>
+                    <FaGoogle />
                   </Button>
 
                   <Button
                     disabled={pending}
-                    onClick={() =>  onSocial("github")} 
+                    onClick={() => onSocial("github")}
                     variant="outline"
                     type="button"
                     className="w-full"
                   >
-                    <FaGithub/>
+                    <FaGithub />
                   </Button>
                 </div>
                 <div className="text-centre text-sm">
@@ -260,4 +257,3 @@ export const SignUpView = () => {
     </div>
   );
 };
-

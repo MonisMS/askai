@@ -9,7 +9,7 @@
     "lint": "next lint",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
-    "now": "concurrently \"npm run dev\" \"npm run db:studio\""
+    "all": "concurrently \"npm run dev\" \"npm run db:studio\""
   },
   "dependencies": {
     "@dicebear/collection": "^9.2.3",
