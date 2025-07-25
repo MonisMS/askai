@@ -7,7 +7,7 @@ interface Props {
 
 export const LoadingState = ({ title, description }: Props) => {
   return (
-    <div className="py-4 px-8 flex flex-2 items-centre justify-center">
+    <div className="py-4 px-8 flex flex-1 items-center min-h-[400px] justify-center">
       <div className="flex flex-col items-center gap-y-6 bg-background rounded-lg p-10 shadow-sm ">
         <Loader2Icon className="size-6 animate-spin text-primary" />
         <div className="flex flex-col gap-y-2 text-center">
