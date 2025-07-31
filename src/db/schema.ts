@@ -1,6 +1,7 @@
 import { nanoid } from "nanoid"
 import { text, pgTable,timestamp,boolean } from "drizzle-orm/pg-core";
-
+import { agentsInsertSchema } from "@/modules/agents/schemas";
+import { z } from "zod";
 
 export const user = pgTable("user", {
 id: text('id').primaryKey(),
@@ -61,4 +62,8 @@ export const agents = pgTable("agents",{
      createdAt: timestamp("created_at").notNull().defaultNow(),
      updatedAt: timestamp("updated_at").notNull().defaultNow(),
 
+})
+
+export const agentsUpdateSchema = agentsInsertSchema.extend({
+     id: z.string().min(1, { message:"ID is required" }),
 })
