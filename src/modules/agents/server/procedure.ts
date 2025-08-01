@@ -1,7 +1,8 @@
 import { db } from "@/db";
 import { createTRPCRouter, protectedProcedure } from "@/trpc/init";
-import { agents, agentsUpdateSchema } from "@/db/schema";
-import { agentsInsertSchema } from "../schemas";
+import { agents } from "@/db/schema";
+
+import { agentsInsertSchema, agentsUpdateSchema } from "../schemas";
 import { z } from "zod";
 import { and,count,desc,eq, getTableColumns, ilike } from "drizzle-orm";
 import { sql } from "drizzle-orm";
