@@ -1,87 +1,89 @@
-import { ReactNode, useState } from "react"
-import { ChevronDownIcon } from "lucide-react"
+import { ReactNode, useState } from "react";
+import { ChevronDownIcon } from "lucide-react";
 
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 import {
-    CommandEmpty,
-    CommandInput,
-    CommandList,
-    CommandItem,
-    CommandResponsiveDialog,
-    
-} from "@/components/ui/command"
-
+  CommandEmpty,
+  CommandInput,
+  CommandList,
+  CommandItem,
+  CommandResponsiveDialog,
+} from "@/components/ui/command";
 
 interface Props {
-    options: Array<{
-        id: string;
-        value: string;
-        children: ReactNode;
-     }>;
-     onSelect: (value: string) => void;
-     onSearch?: (value: string) => void;
-     value?: string;
-        placeholder?: string;
-        isSearchable?: boolean;
-        className?: string;
+  options: Array<{
+    id: string;
+    value: string;
+    children: ReactNode;
+  }>;
+  onSelect: (value: string) => void;
+  onSearch?: (value: string) => void;
+  value?: string;
+  placeholder?: string;
+  isSearchable?: boolean;
+  className?: string;
 }
 
 export const CommandSelect = ({
-    options,
-    onSelect,
-    onSearch,
-    value,
-    placeholder = "Select an option",
-    className,
+  options,
+  onSelect,
+  onSearch,
+  value,
+  placeholder = "Select an option",
+  className,
 }: Props) => {
-    const [open, setOpen] = useState(false);
-    const selectedOption = options.find((option) => option.value === value);
-    return(
-        <>
-        <Button
+  const [open, setOpen] = useState(false);
+  const selectedOption = options.find((option) => option.value === value);
+  const handleOpenChange = (open: boolean) => {
+    onSearch?.("");
+    setOpen(open);
+  };
+
+  return (
+    <>
+      <Button
         onClick={() => setOpen(true)}
         type="button"
         variant="outline"
         className={cn(
-            "h-9 justify-between font-normal px-2",
-        !selectedOption && "text-muted-foreground",
-            className)}
-        >
-            <div>
-                {selectedOption?.children ?? placeholder}
-            </div>
+          "h-9 justify-between font-normal px-2",
+          !selectedOption && "text-muted-foreground",
+          className
+        )}
+      >
+        <div>{selectedOption?.children ?? placeholder}</div>
 
-            <ChevronDownIcon />
-        </Button>
-        <CommandResponsiveDialog
+        <ChevronDownIcon />
+      </Button>
+      <CommandResponsiveDialog
         shouldFilter={!onSearch}
         open={open}
-        onOpenChange={setOpen}
-        >
-            <CommandInput placeholder="Search options..." onValueChange={onSearch} />
-            <CommandList> 
-                <CommandEmpty>
-                    <span className="text-muted-foreground text-sm" >
-                        No options found.
-                    </span>
-                    </CommandEmpty>
-                    {options.map((option) => (
-                        <CommandItem
-                        key={option.id}
-                        onSelect={() => {
-                            onSelect(option.value);
-                            setOpen(false);
-                        }}
-                        >
-                            {option.children}
-
-                        </CommandItem>
-                    ))}
-                </CommandList>
-            
-        </CommandResponsiveDialog>
-        </>
-    )
-
-}
+        onOpenChange={handleOpenChange}
+      >
+        <CommandInput
+          placeholder="Search options..."
+          onValueChange={onSearch}
+        />
+        <CommandList>
+          <CommandEmpty>
+            <span className="text-muted-foreground text-sm">
+              No options found.
+            </span>
+          </CommandEmpty>
+          {options.map((option) => (
+            <CommandItem
+              key={option.id}
+              onSelect={() => {
+                onSelect(option.value);
+                setOpen(false);
+              }}
+            >
+              {option.children}
+            </CommandItem>
+          ))}
+        </CommandList>
+      </CommandResponsiveDialog>
+    </>
+  );
+};

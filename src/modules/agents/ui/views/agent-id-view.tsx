@@ -10,7 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useMutation,useQueryClient,useSuspenseQuery } from "@tanstack/react-query";
-import { useConfirm } from "../../hooks/use-confirm";
+import { useConfirm } from "../../../../hooks/use-confirm";
 import { UpdateAgentDialogue } from "../components/update-agent-dialogue";
 interface Props {
   agentId: string;
