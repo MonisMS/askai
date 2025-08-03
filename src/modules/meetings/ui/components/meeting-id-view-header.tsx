@@ -49,7 +49,7 @@ meetingId,
               asChild
               className="font-medium text-xl text-foreground"
             >
-              <Link href={`/agents/${meetingId}`}>{meetingName}</Link>
+              <Link href={`/meetings/${meetingId}`}>{meetingName}</Link>
             </BreadcrumbLink>
           </BreadcrumbItem>
         </BreadcrumbList>

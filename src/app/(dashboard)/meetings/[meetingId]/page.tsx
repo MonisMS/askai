@@ -31,7 +31,6 @@ const Page = async({params}:Props) => {
             <Suspense fallback={<MeetingIdViewLoading />}>
                 <ErrorBoundary fallback={<MeetingIdViewError />}>
                 <MeetingIdView meetingId={meetingId} />
-            Meeting id page
             </ErrorBoundary>
             </Suspense>
         </HydrationBoundary>
