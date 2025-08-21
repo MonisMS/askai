@@ -28,8 +28,11 @@ const [updateAgentDialogueOpen, setUpdateAgentDialogueOpen] = useState(false);
 
   const removeAgent = useMutation(
     trpc.agents.remove.mutationOptions({
-      onSuccess: () => {
-        queryClient.invalidateQueries(trpc.agents.getMany.queryOptions({}))
+      onSuccess: async () => {
+        queryClient.invalidateQueries(trpc.agents.getMany.queryOptions({}));
+         await queryClient.invalidateQueries(
+                    trpc.premium.getFreeUsage.queryOptions()
+                );
         router.push("/agents");
       },
       onError: (error) => {

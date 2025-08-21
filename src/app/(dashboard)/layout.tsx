@@ -1,5 +1,5 @@
 import { SidebarProvider } from "@/components/ui/sidebar";
-import { DashboardNavbar } from "@/components/dashboard-navbar";
+import { DashboardNavbar } from "@/modules/dashboard/ui/components/dashboard-navbar";
 import { DashboardSidebar } from "@/modules/dashboard/ui/components/dashboard-sidebar";
 import { NuqsAdapter } from "nuqs/adapters/next";
 interface Props {

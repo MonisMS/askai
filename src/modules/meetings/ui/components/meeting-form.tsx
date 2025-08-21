@@ -23,6 +23,7 @@ import { useQuery } from "@tanstack/react-query";
 import { CommandSelect } from "@/components/command-select";
 import { GeneratedAvatar } from "@/components/generated-avatar";
 import { NewAgentDialogue } from "@/modules/agents/ui/components/new-agent-dialogue";
+import { useRouter } from "next/navigation";
 
 interface MeetingFormProps {
     onSuccess?: (id?:string) => void;
@@ -37,6 +38,7 @@ export const MeetingForm = ({
 }: MeetingFormProps) => {
     const trpc = useTRPC();
     const queryClient = useQueryClient();
+    const router = useRouter();
 const [openNewAgentDialog, setOpenNewAgentDialog] = useState(false);
     const [agentSearch, setAgentSearch] = useState("");
 const agents = useQuery(
@@ -52,11 +54,16 @@ const agents = useQuery(
               await queryClient.invalidateQueries(
                     trpc.meetings.getMany.queryOptions({})
                 );
-               //invalidate free tier usage
+                await queryClient.invalidateQueries(
+                    trpc.premium.getFreeUsage.queryOptions()
+                );
                 onSuccess?.(data.id);
             },
             onError: (error) => {
                 toast.error(error.message || "Failed to create agent");
+                 if(error.data?.code === "FORBIDDEN") {
+                    router.push("upgrade");
+                }
             }
             //TODO CHECK IF ERROR CODE IS FORBIDDEN 
 

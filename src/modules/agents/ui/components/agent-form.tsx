@@ -20,6 +20,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { GeneratedAvatar } from "@/components/generated-avatar";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 interface AgentFormProps {
     onSuccess?: () => void;
@@ -34,20 +35,26 @@ export const AgentForm = ({
 }: AgentFormProps) => {
     const trpc = useTRPC();
     const queryClient = useQueryClient();
-
+    const router = useRouter();
     const createAgent = useMutation(
         trpc.agents.create.mutationOptions({
             onSuccess: async() => {
               await queryClient.invalidateQueries(
                     trpc.agents.getMany.queryOptions({})
                 );
-               //invalidate free tier usage
+              await queryClient.invalidateQueries(
+                    trpc.premium.getFreeUsage.queryOptions()
+                );
                 onSuccess?.();
             },
             onError: (error) => {
                 toast.error(error.message || "Failed to create agent");
+
+                if(error.data?.code === "FORBIDDEN") {
+                    router.push("upgrade");
+                }
             }
-            //TODO CHECK IF ERROR CODE IS FORBIDDEN 
+            
 
         })
     )
