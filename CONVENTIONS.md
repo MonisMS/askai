@@ -266,7 +266,7 @@ Read `DESIGN.md` first. In short:
   CSS-variable trick in `components/ui/sonner.tsx`.
 - **Use design tokens, not raw colors.** `bg-background`, `bg-card`, `text-muted-foreground`,
   `border-border`, `text-primary`, `text-destructive`. Not `bg-white`, not `text-blue-700`.
-  (The codebase currently violates this in ~20 places; those are logged as debt, not a precedent.)
+  Meeting status uses the `--status-*` tokens; see DESIGN.md.
 - Merge classes with `cn()` from `@/lib/utils`. Multi-variant components use `cva` (see
   `pricing-card.tsx`).
 - Keep every class on **one line**. A newline inside a `className` string splits the class and

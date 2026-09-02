@@ -71,17 +71,33 @@ desaturated teal-green. Do not reuse these tokens outside the sidebar.
 | `--sidebar-border` | `oklch(0.922 0 0)` | `oklch(1 0 0 / 10%)` | Sidebar dividers |
 | `--sidebar-ring` | `oklch(0.708 0 0)` | `oklch(0.556 0 0)` | Sidebar focus ring |
 
+### Status tokens
+
+Meeting status is the one place beyond `--destructive` where colour carries meaning. Five tokens,
+used as the text colour and, at 10% alpha, as the fill; borders at 20%. Light values sit near
+`L 0.5` so text clears AA on a white card.
+
+| Token | Light | Dark |
+|---|---|---|
+| `--status-upcoming` | `oklch(0.52 0.12 75)` | `oklch(0.78 0.13 75)` |
+| `--status-active` | `oklch(0.52 0.14 250)` | `oklch(0.72 0.13 250)` |
+| `--status-completed` | `oklch(0.5 0.13 150)` | `oklch(0.75 0.14 150)` |
+| `--status-cancelled` | `oklch(0.52 0.17 25)` | `oklch(0.72 0.16 25)` |
+| `--status-processing` | `oklch(0.5 0.02 250)` | `oklch(0.72 0.02 250)` |
+
+Exposed to Tailwind as `bg-status-*`, `text-status-*`, `border-status-*`. Status is never carried by
+colour alone — every badge also has an icon and the status word.
+
 ### Chart tokens
 
 `--chart-1` … `--chart-5` exist in both themes (shadcn defaults, unmodified). Data visualization
 only. Never pull a chart color into general UI.
 
-### No success / warning tokens exist
+### No general success / warning tokens
 
-Only `--destructive` is defined. Meeting status (`upcoming`, `active`, `completed`, `cancelled`,
-`processing`) is currently styled ad hoc in `src/modules/meetings/ui/components/columns.tsx`. If a
-`--success` / `--warning` token is genuinely needed, **ask before adding it** — and derive it from
-the existing green rather than introducing a new hue.
+Beyond `--destructive` and the status set above, there are no semantic state colours. If a general
+`--success` / `--warning` is genuinely needed, **ask before adding it** — and derive it from the
+existing green rather than introducing a new hue.
 
 No other colors exist in this project. Don't invent a new accent for a "special" section.
 
@@ -215,6 +231,9 @@ professional" does nothing.
 >    palette change: propose and confirm, don't do it as a side effect of another task.
 > 2. Single typeface (see Typography).
 >
+> The white overlays on the dark sidebar (`bg-white/5`, `bg-white/10`) and the light text on the
+> dark pricing panel are intentional and on-purpose, not debt.
+>
 > Neither is license to add *new* violations.
 
 ## Motion
@@ -269,4 +288,5 @@ Overloaded prompts that try to fix everything at once tend to fix some things wh
 
 | Date | Change | Reason |
 |---|---|---|
+| 2026-09-02 | Added five `--status-*` tokens | Meeting status badges used raw Tailwind yellow/blue/green/rose/gray at pale opacity — off-palette and poor contrast. Confirmed with the project owner before adding. |
 | 2026-09-02 | Initial extraction from existing codebase | Palette from `src/app/globals.css`, typography from `src/app/layout.tsx` + measured class usage, spacing from measured class usage across `src/**/*.tsx`. No new tokens introduced. |
