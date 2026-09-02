@@ -25,10 +25,10 @@ export const AgentsListHeader = () => {
     <NewAgentDialogue open={isDialogOpen} onOpenChange={setDialogOpen} />
     <div className="py-4 px-4 md:px-8 flex flex-col gap-y-4">
       <div className="flex items-center justify-between">
-        <h5 className="text-lg font-medium">My agents</h5>
+        <h1 className="text-lg font-medium">My Agents</h1>
         <Button onClick={() => setDialogOpen(true)} >
             <PlusIcon/>
-            New agents</Button>
+            New agent</Button>
       </div>
       <ScrollArea>
       <div className="flex items-center gap-x-2 p-1">

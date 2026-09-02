@@ -63,11 +63,11 @@ meetingId,
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuItem onClick={onEdit}>
-            <PencilIcon className="text-black size-4" />
+            <PencilIcon className="size-4" />
             Edit
           </DropdownMenuItem>
           <DropdownMenuItem onClick={onRemove}>
-            <TrashIcon className="text-black size-4" />
+            <TrashIcon className="size-4" />
             Delete
           </DropdownMenuItem>
         </DropdownMenuContent>

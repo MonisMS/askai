@@ -22,11 +22,11 @@ export const columns: ColumnDef<AgentGetMany[number]>[] = [
                 seed={row.original.name}
                 className="size-6"
                 />
-<span className="font-semibold capitalize">{row.original.name}</span>
+<span className="font-semibold">{row.original.name}</span>
             </div>
                 <div className="flex items-center gap-x-2">
 <CornerDownRightIcon className="size-3 text-muted-foreground" />
-<span className="text-sm text-muted-foreground max-w-[200px] truncate capitalize">{row.original.instructions}</span>
+<span className="text-sm text-muted-foreground max-w-[200px] truncate">{row.original.instructions}</span>
                 </div>
             
         </div>
@@ -40,7 +40,7 @@ export const columns: ColumnDef<AgentGetMany[number]>[] = [
         variant="outline"
         className="flex items-center gap-x-2 [&>svg]:size-4"
         >
-            <VideoIcon className="text-blue-700" />
+            <VideoIcon className="text-muted-foreground" />
             {row.original.meetingCount} {row.original.meetingCount === 1 ? "Meeting" : "Meetings"}
         </Badge>
     )

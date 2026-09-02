@@ -9,7 +9,7 @@ import { Separator } from "@/components/ui/separator";
 const pricingCardVariants = cva("rounded-lg p-4 py-6 w-full", {
   variants: {
     variant: {
-      default: "bg-white text-black",
+      default: "bg-card text-card-foreground",
       highlighted: "bg-linear-to-br from-[#093c23] to-[#051B16] text-white",
     },
   },
@@ -30,16 +30,16 @@ const pricingCardIconVariants = cva("size-5", {
   },
 });
 
-const pricingCardSecondaryTextVariants = cva("text-neutral-700", {
+const pricingCardSecondaryTextVariants = cva("text-muted-foreground", {
   variants: {
     variant: {
-      default: "text-neutral-700",
+      default: "text-muted-foreground",
       highlighted: "text-neutral-300",
     },
   },
 });
 
-const pricingCardBadgeVariants = cva("text-black text-xs font-normal p-1", {
+const pricingCardBadgeVariants = cva("text-foreground text-xs font-normal p-1", {
   variants: {
     variant: {
       default: "bg-primary/20",
@@ -79,7 +79,7 @@ export const PricingCard = ({
       <div className="flex items-end gap-x-4 justify-between">
         <div className="flex flex-col gap-y-2">
           <div className="flex items-center gap-x-2">
-            <h6 className="font-medium text-xl">{title}</h6>
+            <h3 className="font-medium text-xl">{title}</h3>
             {badge ? (
               <Badge className={cn(pricingCardBadgeVariants({ variant }))}>
                 {badge}
@@ -96,13 +96,13 @@ export const PricingCard = ({
           </p>
         </div>
         <div className="flex items-end shrink-0 gap-x-0.5">
-          <h4 className="text-3xl font-medium">
+          <p className="text-3xl font-medium">
             {Intl.NumberFormat("en-US", {
               style: "currency",
               currency: "USD",
               minimumFractionDigits: 0,
             }).format(price)}
-          </h4>
+          </p>
           <span className={cn(pricingCardSecondaryTextVariants({ variant }))}>
             {priceSuffix}
           </span>

@@ -25,6 +25,11 @@
   --color-input: var(--input);
   --color-border: var(--border);
   --color-destructive: var(--destructive);
+  --color-status-upcoming: var(--status-upcoming);
+  --color-status-active: var(--status-active);
+  --color-status-completed: var(--status-completed);
+  --color-status-cancelled: var(--status-cancelled);
+  --color-status-processing: var(--status-processing);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent: var(--accent);
   --color-muted-foreground: var(--muted-foreground);
@@ -61,6 +66,12 @@
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
   --destructive: oklch(0.577 0.245 27.325);
+  /*meeting status colours - used for both the text and a tinted fill*/
+  --status-upcoming: oklch(0.52 0.12 75);
+  --status-active: oklch(0.52 0.14 250);
+  --status-completed: oklch(0.5 0.13 150);
+  --status-cancelled: oklch(0.52 0.17 25);
+  --status-processing: oklch(0.5 0.02 250);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
@@ -99,6 +110,11 @@
   --accent: oklch(0.269 0 0);
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);
+  --status-upcoming: oklch(0.78 0.13 75);
+  --status-active: oklch(0.72 0.13 250);
+  --status-completed: oklch(0.75 0.14 150);
+  --status-cancelled: oklch(0.72 0.16 25);
+  --status-processing: oklch(0.72 0.02 250);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.556 0 0);

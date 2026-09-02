@@ -62,7 +62,7 @@ if(!client){
     )
 }
 return(
-    <div className="bg-white rounded-lg border overflow-hidden">
+    <div className="bg-card rounded-lg border overflow-hidden">
         <Chat client={client}>
             <Channel channel={channel}>
                 <Window>

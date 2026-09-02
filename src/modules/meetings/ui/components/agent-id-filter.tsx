@@ -22,7 +22,9 @@ return (
    <CommandSelect 
    className="h-9"
    placeholder="Agent"
-   options={(data?.items ?? []).map((agent) =>({
+   options={[
+    { id: "all", value: "", children: <span>All agents</span> },
+    ...(data?.items ?? []).map((agent) =>({
     id:agent.id,
     value:agent.id,
     children:(
@@ -36,7 +38,7 @@ return (
              
         </div>
     )
-   }) )}
+   }) )]}
    onSelect={(value) => setFilters({ agentId:value})}
    onSearch={setAgentSearch}
    value={filters.agentId ?? ""}

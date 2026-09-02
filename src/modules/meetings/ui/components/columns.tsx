@@ -10,6 +10,7 @@ import {
   CornerDownRightIcon,
   LoaderIcon,
   ClockArrowUpIcon,
+  VideoIcon,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { MeetingGetMany } from "../../types";
@@ -21,18 +22,22 @@ import { cn, formatDuration } from "@/lib/utils";
 
 const statusIconMap = {
   upcoming: ClockArrowUpIcon,
-  active: LoaderIcon,
+  active: VideoIcon,
   completed: CircleCheckIcon,
   cancelled: CircleXIcon,
   processing: LoaderIcon,
 };
 
 const statusColorMap = {
-  upcoming: "bg-yellow-500/20 text-yellow-800 border-yellow-800/5",
-  active: "bg-blue-500/20 text-blue-800 border-blue-800/5",
-  completed: "bg-green-500/20 text-green-800 border-green-800/5",
-  cancelled: "bg-rose-500/20 text-rose-800 border-rose-800/5",
-  processing: "bg-gray-300/20 text-gray-800 border-gray-800/5",
+  upcoming:
+    "bg-status-upcoming/10 text-status-upcoming border-status-upcoming/20",
+  active: "bg-status-active/10 text-status-active border-status-active/20",
+  completed:
+    "bg-status-completed/10 text-status-completed border-status-completed/20",
+  cancelled:
+    "bg-status-cancelled/10 text-status-cancelled border-status-cancelled/20",
+  processing:
+    "bg-status-processing/10 text-status-processing border-status-processing/20",
 };
 
 export const columns: ColumnDef<MeetingGetMany[number]>[] = [
@@ -41,11 +46,11 @@ export const columns: ColumnDef<MeetingGetMany[number]>[] = [
     header: "Meeting Name",
     cell: ({ row }) => (
       <div className="flex flex-col gap-y-1">
-        <span className="font-semibold capitalize">{row.original.name}</span>
+        <span className="font-semibold">{row.original.name}</span>
         <div className="flex items-center gap-x-2">
           <div className="flex items-center gap-x-1">
             <CornerDownRightIcon className="size-3 text-muted-foreground" />
-            <span className="text-sm text-muted-foreground max-w-[200px] truncate capitalize">
+            <span className="text-sm text-muted-foreground max-w-[200px] truncate">
               {row.original.agent.name}
             </span>
           </div>  
@@ -70,7 +75,7 @@ export const columns: ColumnDef<MeetingGetMany[number]>[] = [
         <Badge
         variant="outline"
         className={cn(
-          "capitalize [&>svg]:size-4 text-muted-foreground",
+          "capitalize [&>svg]:size-4",
           statusColorMap[row.original.status as keyof typeof statusColorMap]
         )}
         >
@@ -92,7 +97,7 @@ export const columns: ColumnDef<MeetingGetMany[number]>[] = [
       variant="outline"
       className="capitalize [&>svg]:size-4 flex items-center gap-x-2"
       >
-        <ClockFadingIcon className="text-blue-700" />
+        <ClockFadingIcon className="text-muted-foreground" />
         {row.original.duration ? formatDuration(row.original.duration) : "No duration"}
         </Badge>
     )

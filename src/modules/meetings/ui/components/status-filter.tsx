@@ -3,7 +3,8 @@ import {
     CircleCheckIcon,
     ClockArrowUpIcon,
     VideoIcon,
-    LoaderIcon
+    LoaderIcon,
+    ListFilterIcon
 } from "lucide-react"
 
 import { CommandSelect } from "@/components/command-select"
@@ -12,6 +13,16 @@ import { MeetingStatus } from "../../types"
 import { useMeetingsFilters } from "../../hooks/use-meetings-filters"
 
 const options = [
+    {
+        id: "all",
+        value: "",
+        children: (
+            <div className="flex items-center gap-x-2">
+                <ListFilterIcon />
+                All statuses
+            </div>
+        )
+    },
     {
         id: MeetingStatus.Upcoming,
         value: MeetingStatus.Upcoming,
@@ -71,7 +82,7 @@ export const StatusFilter = () => {
         placeholder="Status"
         className="h-9"
         options={options}
-        onSelect={(value) => setFilters({status: value as MeetingStatus})}
+        onSelect={(value) => setFilters({ status: value ? (value as MeetingStatus) : null })}
         value={filters.status ?? "" }
         
         

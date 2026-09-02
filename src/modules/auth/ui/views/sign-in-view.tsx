@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/form";
 import { Alert, AlertTitle } from "@/components/ui/alert";
 import { authClient } from "@/lib/auth-client";
-import { OctagonAlertIcon } from "lucide-react";
+import { OctagonAlertIcon, Loader2Icon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -151,7 +151,8 @@ export const SignInView = () => {
                 disabled ={pending}
                 type="submit" 
                 className="w-full">
-                  Sign In
+                  {pending && <Loader2Icon className="animate-spin" />}
+                  {pending ? "Signing in..." : "Sign In"}
                 </Button>
                 <div
                   className="after:border-border relative text-center text-sm after:absolute

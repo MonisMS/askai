@@ -20,6 +20,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { GeneratedAvatar } from "@/components/generated-avatar";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
+import { Loader2Icon } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 interface AgentFormProps {
@@ -74,10 +75,8 @@ export const AgentForm = ({
                 onSuccess?.();
             },
             onError: (error) => {
-                toast.error(error.message || "Failed to create agent");
+                toast.error(error.message || "Failed to update agent");
             }
-            //TODO CHECK IF ERROR CODE IS FORBIDDEN 
-
         })
     )
     const form = useForm<z.infer<typeof agentsInsertSchema>>({
@@ -149,7 +148,8 @@ render={({ field }) => (
         </Button>
     )}
     <Button disabled={isPending} type="submit">
-        {IsEdit ? "Update" : "Create"}
+        {isPending && <Loader2Icon className="animate-spin" />}
+        {isPending ? (IsEdit ? "Updating..." : "Creating...") : IsEdit ? "Update" : "Create"}
     </Button>
 </div>
 </form>

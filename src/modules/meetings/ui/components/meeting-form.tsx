@@ -18,6 +18,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
+import { Loader2Icon } from "lucide-react";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { CommandSelect } from "@/components/command-select";
@@ -60,7 +61,7 @@ const agents = useQuery(
                 onSuccess?.(data.id);
             },
             onError: (error) => {
-                toast.error(error.message || "Failed to create agent");
+                toast.error(error.message || "Failed to create meeting");
                  if(error.data?.code === "FORBIDDEN") {
                     router.push("/upgrade");
                 }
@@ -85,10 +86,8 @@ const agents = useQuery(
                 onSuccess?.();
             },
             onError: (error) => {
-                toast.error(error.message || "Failed to create agent");
+                toast.error(error.message || "Failed to update meeting");
             }
-            //TODO CHECK IF ERROR CODE IS FORBIDDEN 
-
         })
     )
     const form = useForm<z.infer<typeof meetingsInsertSchema>>({
@@ -192,7 +191,8 @@ placeholder="Select an agent"
         </Button>
     )}
     <Button disabled={isPending} type="submit">
-        {IsEdit ? "Update" : "Create"}
+        {isPending && <Loader2Icon className="animate-spin" />}
+        {isPending ? (IsEdit ? "Updating..." : "Creating...") : IsEdit ? "Update" : "Create"}
     </Button>
 </div>
 </form>
