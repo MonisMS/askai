@@ -7,32 +7,29 @@ import { ResponsiveDialog } from "@/components/responsive-dialogue";
 export const useConfirm = (
   title: string,
   description: string
-): [() => JSX.Element, () => Promise<unknown>] => {
+): [() => JSX.Element, () => Promise<boolean>] => {
   const [promise, setPromise] = useState<{
     resolve: (value: boolean) => void;
   } | null>(null);
 
   const confirm = () => {
-    return new Promise((resolve) => {
+    return new Promise<boolean>((resolve) => {
       setPromise({ resolve });
     });
   };
-  const handleClose = () => {
+  // Every exit path must settle the promise, otherwise `await confirm()` hangs
+  // forever when the dialog is dismissed with Escape or an overlay click.
+  const settle = (value: boolean) => {
+    promise?.resolve(value);
     setPromise(null);
   };
-  const handleConfirm = () => {
-    promise?.resolve(true);
-    handleClose();
-  };
-  const handleCancel = () => {
-    promise?.resolve(false);
-    handleClose();
-  };
+  const handleConfirm = () => settle(true);
+  const handleCancel = () => settle(false);
 
   const ConfirmationDialog = () => (
     <ResponsiveDialog
       open={promise !== null}
-      onOpenChange={handleClose}
+      onOpenChange={handleCancel}
       title={title}
       description={description}
     >

@@ -66,7 +66,7 @@ return(
         <Chat client={client}>
             <Channel channel={channel}>
                 <Window>
-                    <div className="flex-1 overflow-y-auto  max-h[calc(100vh-23rem)] border-b">
+                    <div className="flex-1 overflow-y-auto  max-h-[calc(100vh-23rem)] border-b">
                         <MessageList />
                     </div>
                     <MessageInput />

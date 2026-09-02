@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Bot, Video, MessageSquare, Plus, ArrowRight, Sparkles, Users, Calendar } from "lucide-react";
+import { Bot, Video, MessageSquare, Plus, ArrowRight, Sparkles, Calendar } from "lucide-react";
 import Link from "next/link";
 
 export const HomeView = () => {

@@ -10,6 +10,7 @@ import {
 import { MeetingIdViewHeader } from "../components/meeting-id-view-header";
 import { useRouter } from "next/navigation";
 import { useConfirm } from "@/hooks/use-confirm";
+import { toast } from "sonner";
 import { UpdateMeetingDialog } from "../components/update-meeting-dialogue";
 import { useState } from "react";
 import { UpcomingState } from "../components/upcoming-state";
@@ -34,6 +35,11 @@ export const MeetingIdView = ({ meetingId }: Props) => {
     "The following action will remove this meeting"
   );
 
+  const [CancelConfirmation, confirmCancel] = useConfirm(
+    "Cancel this meeting?",
+    "The meeting will be marked as cancelled and can no longer be started."
+  );
+
   const { data } = useSuspenseQuery(
     trpc.meetings.getOne.queryOptions({ id: meetingId })
   );
@@ -48,6 +54,28 @@ export const MeetingIdView = ({ meetingId }: Props) => {
       },
     })
   );
+
+  const cancelMeeting = useMutation(
+    trpc.meetings.cancel.mutationOptions({
+      onSuccess: async () => {
+        await queryClient.invalidateQueries(
+          trpc.meetings.getOne.queryOptions({ id: meetingId })
+        );
+        await queryClient.invalidateQueries(
+          trpc.meetings.getMany.queryOptions({})
+        );
+      },
+      onError: (error) => {
+        toast.error(error.message || "Failed to cancel meeting");
+      },
+    })
+  );
+
+  const handleCancelMeeting = async () => {
+    const ok = await confirmCancel();
+    if (!ok) return;
+    cancelMeeting.mutate({ id: meetingId });
+  };
 
   const handleRemoveMeeting = async () => {
     const ok = await confirmRemove();
@@ -64,6 +92,7 @@ export const MeetingIdView = ({ meetingId }: Props) => {
   return (
     <>
       <RemoveConfirmation />
+      <CancelConfirmation />
       <UpdateMeetingDialog
         open={updateMeetingDialogOpen}
         onOpenChange={setUpdateMeetingDialogOpen}
@@ -83,8 +112,8 @@ export const MeetingIdView = ({ meetingId }: Props) => {
         {isUpcoming && (
           <UpcomingState
             meetingId={meetingId}
-            onCancelMeeting={() => {}}
-            isCancelling={false}
+            onCancelMeeting={handleCancelMeeting}
+            isCancelling={cancelMeeting.isPending}
           />
         )}
       </div>

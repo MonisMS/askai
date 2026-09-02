@@ -16,6 +16,7 @@ import { format } from "date-fns";
 import { formatDuration } from "@/lib/utils";
 import { Transcript } from "./transcript";
 import { ChatProvider } from "./chat-provider";
+import { EmptyState } from "@/components/empty-state";
 interface Props {
   data: MeetingGetOne;
 }
@@ -74,16 +75,23 @@ export const CompletedState = ({ data }: Props) => {
           </TabsContent>
         <TabsContent value="recording">
           <div className="bg-white rounded-lg border px-4 py-5">
-            <video
-              src={data.recordingUrl!}
-              className="w-full rounded-lg"
-              controls
-            />
+            {data.recordingUrl ? (
+              <video
+                src={data.recordingUrl}
+                className="w-full rounded-lg"
+                controls
+              />
+            ) : (
+              <EmptyState
+                title="No recording available"
+                description="The recording for this meeting has not finished processing yet. Check back in a few minutes."
+              />
+            )}
           </div>
         </TabsContent>
         <TabsContent value="summary">
           <div className="bg-white rounded-lg  border">
-            <div className="px-4 py-5 gap-y-5 flex flex-col col-span-5">
+            <div className="px-4 py-5 gap-y-5 flex flex-col">
               <h2 className="text-2xl font-medium capitalize">{data.name}</h2>
               <div className="flex gap-x-2 items-center">
                 <Link
@@ -111,6 +119,7 @@ export const CompletedState = ({ data }: Props) => {
                 {data.duration ? formatDuration(data.duration) : "No duration"}
               </Badge>
               <div>
+                {data.summary ? (
                 <Markdown
                   components={{
                     h1: (props) => (
@@ -157,6 +166,12 @@ export const CompletedState = ({ data }: Props) => {
                 >
                   {data.summary}
                 </Markdown>
+                ) : (
+                  <EmptyState
+                    title="No summary yet"
+                    description="The summary for this meeting is still being generated. It will appear here shortly."
+                  />
+                )}
               </div>
             </div>
           </div>

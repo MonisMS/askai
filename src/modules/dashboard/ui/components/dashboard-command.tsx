@@ -81,7 +81,6 @@ export const DashboardCommand = ({ open, setOpen }: Props) => {
             </CommandItem>
           ))}
         </CommandGroup>
-        <CommandItem>Test</CommandItem>
       </CommandList>
     </CommandResponsiveDialog>
   );

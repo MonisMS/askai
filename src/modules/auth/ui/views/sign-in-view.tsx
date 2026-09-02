@@ -98,7 +98,7 @@ export const SignInView = () => {
               <div className="flex flex-col gap-6">
                 <div className="flex flex-col items-center text-center">
                   <h1 className="text-2xl font-bold">Welcome Back</h1>
-                  <p className="text-muted-foreground text-balancer">
+                  <p className="text-muted-foreground text-balance">
                     Login to your account
                   </p>
                 </div>
@@ -180,7 +180,7 @@ export const SignInView = () => {
                     <FaGithub/>
                   </Button>
                 </div>
-                <div className="text-centre text-sm">
+                <div className="text-center text-sm">
                   Don&apos;t have an account?{" "}
                   <Link
                     href="/sign-up"

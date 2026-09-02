@@ -2,7 +2,7 @@ import { EmptyState } from "@/components/empty-state";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
-import { VideoIcon, BanIcon } from "lucide-react";
+import { VideoIcon, BanIcon, Loader2Icon } from "lucide-react";
 interface Props{
     meetingId: string;
     onCancelMeeting: () => void;
@@ -23,14 +23,17 @@ export const UpcomingState = ({
             />
             <div className="flex flex-col-reverse lg:flex-row lg:justify-center items-center gap-2 w-full">
                 <Button
-                variant="secondary"
+                variant="outline"
                 className="w-full lg:w-auto"
                 onClick={onCancelMeeting}
                 disabled={isCancelling}
-                
                 >
-                    <BanIcon />
-                    Cancel Meeting
+                    {isCancelling ? (
+                        <Loader2Icon className="animate-spin" />
+                    ) : (
+                        <BanIcon />
+                    )}
+                    {isCancelling ? "Cancelling..." : "Cancel Meeting"}
                 </Button>
                 <Button disabled={isCancelling} asChild className="w-full lg:w-auto">
                     <Link href={`/call/${meetingId}`}>

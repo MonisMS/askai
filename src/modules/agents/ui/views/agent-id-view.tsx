@@ -70,7 +70,7 @@ await removeAgent.mutateAsync({ id: agentId });
         onRemove={handleRemoveAgent}
       />
       <div className="bg-white rounded-lg border">
-        <div className="px-4 py-5 gap-y-5 flex flex-col col-span-5">
+        <div className="px-4 py-5 gap-y-5 flex flex-col">
           <div className="flex items-center gap-x-3">
             <GeneratedAvatar
               variant="botttsNeutral"
