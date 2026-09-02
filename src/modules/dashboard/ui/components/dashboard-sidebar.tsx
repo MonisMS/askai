@@ -42,6 +42,9 @@ const secondSection = [
 
 export const DashboardSidebar = () => {
   const pathname = usePathname();
+  // Detail routes (/meetings/<id>) must keep their section highlighted.
+  const isSectionActive = (href: string) =>
+    pathname === href || pathname.startsWith(`${href}/`);
   return (
     <Sidebar>
       <SidebarHeader className="text-sidebar-accent-foreground">
@@ -63,9 +66,9 @@ export const DashboardSidebar = () => {
                     asChild
                     className={cn(
                       "h-10 hover:bg-linear-to-r/oklch border border-transparent hover:border-[#5D6B68]/10 from-sidebar-accent from-5% via-30% via-sidebar/50 to-sidebar/50",
-                      pathname === item.href && "bg-linear-to-r/oklch border-[#5D6B68]/10"
+                      isSectionActive(item.href) && "bg-linear-to-r/oklch border-[#5D6B68]/10"
                     )}
-                    isActive={pathname===item.href}
+                    isActive={isSectionActive(item.href)}
                   >
                     <Link href={item.href}>
                       <item.icon className="size-5" />
@@ -91,9 +94,9 @@ export const DashboardSidebar = () => {
                     asChild
                     className={cn(
                       "h-10 hover:bg-linear-to-r/oklch border border-transparent hover:border-[#5D6B68]/10 from-sidebar-accent from-5% via-30% via-sidebar/50 to-sidebar/50",
-                      pathname === item.href && "bg-linear-to-r/oklch border-[#5D6B68]/10"
+                      isSectionActive(item.href) && "bg-linear-to-r/oklch border-[#5D6B68]/10"
                     )}
-                    isActive={pathname===item.href}
+                    isActive={isSectionActive(item.href)}
                   >
                     <Link href={item.href}>
                       <item.icon className="size-5" />

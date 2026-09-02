@@ -4,10 +4,23 @@ import { Button } from "@/components/ui/button";
 import { ResponsiveDialog } from "@/components/responsive-dialogue";
 
 
+interface ConfirmOptions {
+  confirmLabel?: string;
+  cancelLabel?: string;
+  /** Destructive actions must not be styled as the positive/primary choice. */
+  variant?: "default" | "destructive";
+}
+
 export const useConfirm = (
   title: string,
-  description: string
+  description: string,
+  options: ConfirmOptions = {}
 ): [() => JSX.Element, () => Promise<boolean>] => {
+  const {
+    confirmLabel = "Confirm",
+    cancelLabel = "Cancel",
+    variant = "default",
+  } = options;
   const [promise, setPromise] = useState<{
     resolve: (value: boolean) => void;
   } | null>(null);
@@ -38,12 +51,13 @@ export const useConfirm = (
         onClick={handleCancel}
         variant="outline"
         className="w-full lg:w-auto">
-            Cancel
+            {cancelLabel}
         </Button>
         <Button 
         onClick={handleConfirm}
+        variant={variant}
         className="w-full lg:w-auto">
-            Confirm
+            {confirmLabel}
         </Button>
       </div>
     </ResponsiveDialog>

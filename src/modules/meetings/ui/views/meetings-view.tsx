@@ -17,6 +17,26 @@ export const MeetingsView = () => {
     const { data } = useSuspenseQuery(trpc.meetings.getMany.queryOptions({
       ...filters
     }))
+    const isFiltered = !!filters.search || !!filters.status || !!filters.agentId;
+
+    if (data.items.length === 0) {
+        return (
+            <div className="flex-1 pb-4 px-4 md:px-8 flex flex-col gap-y-4">
+                {isFiltered ? (
+                    <EmptyState
+                        title="No meetings found"
+                        description="No meetings match your filters. Try adjusting them, or clear the filters to see all of your meetings."
+                    />
+                ) : (
+                    <EmptyState
+                        title="Create your first meeting"
+                        description="Schedule a meeting with one of your agents. Each meeting lets you talk in real time, then keeps the transcript and summary afterwards."
+                    />
+                )}
+            </div>
+        );
+    }
+
     return(
         <div className="flex-1 pb-4 px-4 md:px-8 flex flex-col gap-y-4">
            <DataTable
@@ -28,16 +48,7 @@ export const MeetingsView = () => {
            page={filters.page}
            totalPages={data.totalPages}
            onPageChange={(page) => setFilters({ page })}
-
            />
-            {data.items.length === 0 && (
-                 
-                   <EmptyState
-                     title="Create your first meeting"
-                     description="Schedule a meeting to connect with other. Each meeting
-                     lets you collaborate, share ideas, and interact with participants in real time."
-                   />
-               )}
         </div>
     )
 }

@@ -57,7 +57,7 @@ meetingId,
       {/*Without modal={false},the dialogue this dropdown opens causes the website to get unclickable  */}
       <DropdownMenu modal={false}>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost">
+          <Button variant="ghost" aria-label="More meeting actions">
             <MoreVerticalIcon />
           </Button>
         </DropdownMenuTrigger>

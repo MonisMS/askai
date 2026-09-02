@@ -10,7 +10,7 @@ const Layout = ({ children }: Props) => {
     <NuqsAdapter>
   <SidebarProvider>
     <DashboardSidebar/>
-    <main className="flex flex-col h-screen w-screen bg-muted">
+    <main className="flex flex-col h-screen flex-1 min-w-0 bg-muted">
     <DashboardNavbar/>
     {children}
     </main>

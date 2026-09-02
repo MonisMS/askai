@@ -31,13 +31,15 @@ export const MeetingIdView = ({ meetingId }: Props) => {
   const [updateMeetingDialogOpen, setUpdateMeetingDialogOpen] = useState(false);
 
   const [RemoveConfirmation, confirmRemove] = useConfirm(
-    "Are you sure?",
-    "The following action will remove this meeting"
+    "Delete this meeting?",
+    "This will permanently delete the meeting along with its transcript and summary. This cannot be undone.",
+    { confirmLabel: "Delete meeting", variant: "destructive" }
   );
 
   const [CancelConfirmation, confirmCancel] = useConfirm(
     "Cancel this meeting?",
-    "The meeting will be marked as cancelled and can no longer be started."
+    "The meeting will be marked as cancelled and can no longer be started.",
+    { confirmLabel: "Cancel meeting", cancelLabel: "Keep meeting" }
   );
 
   const { data } = useSuspenseQuery(

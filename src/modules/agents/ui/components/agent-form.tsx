@@ -51,7 +51,7 @@ export const AgentForm = ({
                 toast.error(error.message || "Failed to create agent");
 
                 if(error.data?.code === "FORBIDDEN") {
-                    router.push("upgrade");
+                    router.push("/upgrade");
                 }
             }
             

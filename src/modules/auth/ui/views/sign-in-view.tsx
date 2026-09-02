@@ -167,6 +167,7 @@ export const SignInView = () => {
                   onClick={() =>onSocial("google")} 
                   variant="outline" 
                   type="button" 
+                  aria-label="Continue with Google"
                   className="w-full">
                     <FaGoogle/>
                   </Button>
@@ -176,6 +177,7 @@ export const SignInView = () => {
                   onClick={() => onSocial("github")} 
                   variant="outline" 
                   type="button" 
+                  aria-label="Continue with GitHub"
                   className="w-full">
                     <FaGithub/>
                   </Button>

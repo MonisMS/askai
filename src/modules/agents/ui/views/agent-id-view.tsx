@@ -41,9 +41,9 @@ const [updateAgentDialogueOpen, setUpdateAgentDialogueOpen] = useState(false);
     })
   );
 const [RemoveConfirmation, confirmRemove] = useConfirm(
-  "Are you sure you want to remove this agent?",
-  `The following action will remove the agent ${data.name} with all its ${data.meetingCount} meetings.`,
-
+  "Delete this agent?",
+  `This will permanently delete ${data.name} and all ${data.meetingCount} of its meetings. This cannot be undone.`,
+  { confirmLabel: "Delete agent", variant: "destructive" }
 );
 const handleRemoveAgent = async () => {
   const ok = await confirmRemove()

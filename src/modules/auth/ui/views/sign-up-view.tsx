@@ -206,6 +206,7 @@ export const SignUpView = () => {
                     onClick={() => onSocial("google")}
                     variant="outline"
                     type="button"
+                    aria-label="Continue with Google"
                     className="w-full"
                   >
                     <FaGoogle />
@@ -216,6 +217,7 @@ export const SignUpView = () => {
                     onClick={() => onSocial("github")}
                     variant="outline"
                     type="button"
+                    aria-label="Continue with GitHub"
                     className="w-full"
                   >
                     <FaGithub />
